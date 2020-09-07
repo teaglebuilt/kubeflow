@@ -1,6 +1,7 @@
 from airflow import DAG
 from datetime import datetime, timedelta
 from airflow.operators.dummy_operator import DummyOperator
+from datetime import datetime
 
 project_name = 'test_project'
 
@@ -20,7 +21,7 @@ default_args = {
 main_dag = DAG(
     project_name,
     default_args = default_args,
-    schedule_interval= "" # get_schedule()
+    schedule_interval= datetime.now() # get_schedule()
 )
 
 start = DummyOperator(

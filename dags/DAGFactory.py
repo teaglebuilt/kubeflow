@@ -13,15 +13,16 @@ class DAGFactory(object):
     def __init__(self):
         self.project_base = os.path.join(AIRFLOW_BASE, 'clients')
     
+    @property
     def projects(self):
         return list(filter(lambda x: x not in ['__pycache__'],
-            [dirs for _, dirs in os.walk(self.project_base)][0]))
+            [dirs for _, dirs, _ in os.walk(self.project_base)][0]))
 
     def get_modules_from_clients(self):
         for client in self.projects:
+            import pdb;pdb.set_trace()
             try:
                 module_name = "clients.{}.DAG".format(client)
-                print(module_name)
                 prj_mod = import_module(module_name)
                 no_of_project_dags = 1
 
